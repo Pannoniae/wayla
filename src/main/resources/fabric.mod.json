@@ -1,0 +1,11 @@
+{
+  "id": "wayla",
+  "name": "What Are You Looking At",
+  "version": "1.0.0",
+  "side": "universal",
+  "initializer": "net.panno.wayla.Main",
+  "mixins": {
+    "client": "modid.client.json",
+    "common": "modid.common.json"
+  }
+}

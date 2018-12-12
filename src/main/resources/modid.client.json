@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "net.panno.wayla.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "GUIMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
