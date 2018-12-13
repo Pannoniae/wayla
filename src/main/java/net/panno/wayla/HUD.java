@@ -1,13 +1,14 @@
 package net.panno.wayla;
 
 import net.minecraft.client.MinecraftClient;
-import net.panno.wayla.elements.BlockElement;
+import net.panno.wayla.elements.block.BlockElement;
 import net.panno.wayla.elements.Element;
 import net.panno.wayla.elements.Layout;
-import net.panno.wayla.elements.SubElement;
+import net.panno.wayla.elements.fluid.FluidElement;
 
 import java.util.ArrayList;
 
+import java.util.Collections;
 import static net.panno.wayla.util.Config.*;
 import static net.panno.wayla.util.RenderUtil.drawBeveledBox;
 
@@ -15,6 +16,7 @@ public class HUD {
 
     public HUD() {
         addElement(new BlockElement());
+        addElement(new FluidElement());
     }
 
     public ArrayList<Element> elements = new ArrayList<>();
@@ -25,7 +27,8 @@ public class HUD {
 
 
     public void draw() {
-        if (getTotalHeight() == 0) {
+        // apart from 2 margins no element is there
+        if (getTotalHeight() == 2 * marginY) {
             return;
         }
         MinecraftClient mc = MinecraftClient.getInstance();
@@ -45,6 +48,13 @@ public class HUD {
 
         int currentY = overlayTopY;
 
+        if (drawOnlyOne) {
+            Element element = getMostImportantElement();
+            int currentX = x - (element.getMaxWidth() / 2);
+            element.draw(currentX, currentY, Layout.CENTER_ALIGNED);
+            return;
+        }
+
         for (Element element : elements) {
             int currentX = x - (element.getMaxWidth() / 2);
             element.draw(currentX, currentY, Layout.CENTER_ALIGNED);
@@ -56,13 +66,22 @@ public class HUD {
     private int getTotalHeight() {
         int height = 0;
         height += marginY;
-        for (Element element :
-                elements) {
+        if (drawOnlyOne) {
+            Element element = getMostImportantElement();
+            height += element.getHeight();
+            height += marginY;
+            return height;
+        }
+        for (Element element : elements) {
             height += element.getHeight();
         }
         height += marginY;
 
         return height;
+    }
+
+    private Element getMostImportantElement() {
+        return Collections.max(elements);
     }
 
     public int getWidth() {

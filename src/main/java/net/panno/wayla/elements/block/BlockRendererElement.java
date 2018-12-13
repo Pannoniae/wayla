@@ -1,9 +1,10 @@
-package net.panno.wayla.elements;
+package net.panno.wayla.elements.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
+import net.panno.wayla.elements.Element;
+import net.panno.wayla.elements.SubElement;
 
-import static net.panno.wayla.util.Config.blockSize;
 import static net.panno.wayla.util.RenderUtil.renderItemStack;
 
 public class BlockRendererElement extends SubElement<Block> {

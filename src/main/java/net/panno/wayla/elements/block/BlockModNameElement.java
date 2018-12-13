@@ -1,8 +1,10 @@
-package net.panno.wayla.elements;
+package net.panno.wayla.elements.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.util.registry.Registry;
+import net.panno.wayla.elements.Element;
+import net.panno.wayla.elements.SubElement;
 
 public class BlockModNameElement extends SubElement<Block> {
 

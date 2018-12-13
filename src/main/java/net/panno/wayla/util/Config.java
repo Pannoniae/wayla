@@ -7,4 +7,7 @@ public class Config {
     public static int marginX = 4, marginY = 4; // Distance between the border of the rectangle and the item/text/whatever
     public static int innerMargin = 2;
     public static int blockSize = 16;
+
+    public static boolean drawOnlyOne = true;
+
 }

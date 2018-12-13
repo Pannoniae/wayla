@@ -2,9 +2,9 @@ package net.panno.wayla.elements;
 
 public abstract class SubElement<T> {
 
-    Element<T> parent;
+    public Element<T> parent;
 
-    SubElement(Element parent) {
+    public SubElement(Element parent) {
         this.parent = parent;
     }
 
