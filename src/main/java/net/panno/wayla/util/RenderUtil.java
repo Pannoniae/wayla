@@ -1,9 +1,9 @@
 package net.panno.wayla.util;
 
 import com.mojang.blaze3d.platform.GlStateManager;
-import net.minecraft.class_308;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.render.GuiLighting;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.item.ItemStack;
 
@@ -15,7 +15,7 @@ public class RenderUtil {
             GlStateManager.pushMatrix();
             GlStateManager.enableBlend();
             GlStateManager.blendFunc(GlStateManager.SrcBlendFactor.SRC_ALPHA, GlStateManager.DstBlendFactor.ONE_MINUS_SRC_ALPHA);
-            class_308.method_1453();
+            GuiLighting.enableForItems();
 
             ItemRenderer itemRenderer = MinecraftClient.getInstance().getItemRenderer();
             itemRenderer.renderItemAndGlowInGui(stack, x, y);

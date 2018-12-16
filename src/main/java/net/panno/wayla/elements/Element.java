@@ -3,19 +3,42 @@ package net.panno.wayla.elements;
 import net.minecraft.client.MinecraftClient;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static net.panno.wayla.util.Config.innerMargin;
 
 public abstract class Element<T> implements Comparable<Element> {
 
-    ArrayList<SubElement> subElements = new ArrayList<>();
+    public Layout layout;
+    private ArrayList<SubElement> subElements = new ArrayList<>();
+    private HashMap<String, SubElement> tagMap = new HashMap<>();
+
 
     // for example, a block, fluid, etc., which is commonly used throughout the subelements
     public abstract T getTarget();
 
-    public void draw(int x, int y, Layout layout) {
+    public Element(Layout layout) {
+        this.layout = layout;
+    }
+
+    public Element() {
+        this.layout = Layout.CENTER_ALIGNED;
+    }
+
+    public void draw(int x, int y) {
 
         if (isVisible()) {
+
+            if (layout == Layout.SPECIAL) {
+                SubElement render = getElementWithTag("render");
+                render.draw(x, y + (getHeight() / 2) - (render.getHeight() / 2));
+                SubElement name = getElementWithTag("name");
+                name.draw(x + render.getWidth() + innerMargin, y);
+                SubElement modName = getElementWithTag("modName");
+                modName.draw(x + render.getWidth() + innerMargin, y + innerMargin + name.getHeight());
+                modName.draw(x + render.getWidth() + innerMargin, y + innerMargin + name.getHeight());
+                return;
+            }
 
             for (SubElement e : getSubElements()) {
                 y += innerMargin;
@@ -29,6 +52,20 @@ public abstract class Element<T> implements Comparable<Element> {
 
             }
         }
+    }
+
+    public SubElement getElementWithTag(String tag) {
+        if (!tagMap.containsKey(tag)) {
+            for (SubElement se : subElements) {
+                if (se.getTag().equals(tag)) {
+                    tagMap.put(tag, se);
+                    return se;
+                }
+            }
+        } else {
+            return tagMap.get(tag);
+        }
+        return null; //something got fucked up aka crash the program
     }
 
     public boolean isVisible() {
@@ -49,16 +86,25 @@ public abstract class Element<T> implements Comparable<Element> {
 
     public void addSubElement(SubElement element) {
         subElements.add(element);
-    };
+    }
 
     public ArrayList<SubElement> getSubElements() {
         return subElements;
-    };
+    }
 
     public int getMaxWidth() {
 
         if (!isVisible()) {
             return 0;
+        }
+
+        if (layout == Layout.SPECIAL) {
+            return getElementWithTag("render").getWidth() +
+                    innerMargin +
+                    Math.max(
+                            getElementWithTag("modName").getWidth(),
+                            getElementWithTag("name").getWidth()
+                    );
         }
 
         int width = 0;
@@ -76,12 +122,15 @@ public abstract class Element<T> implements Comparable<Element> {
             return 0;
         }
 
+        if (layout == Layout.SPECIAL) {
+            return getElementWithTag("modName").getHeight() + innerMargin + getElementWithTag("name").getHeight();
+        }
+
         int height = 0;
         for (SubElement subElement : subElements) {
 
             height += subElement.getHeight();
         }
-        height += innerMargin;
         return height;
     }
 

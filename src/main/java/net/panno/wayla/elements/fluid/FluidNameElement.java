@@ -1,9 +1,7 @@
 package net.panno.wayla.elements.fluid;
 
-import net.minecraft.block.Block;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.fluid.FluidState;
-import net.minecraft.item.ItemStack;
 import net.panno.wayla.elements.Element;
 import net.panno.wayla.elements.SubElement;
 
@@ -16,6 +14,11 @@ public class FluidNameElement extends SubElement<FluidState> {
     public String getBlockName() {
         FluidState fluidState = parent.getTarget();
         return fluidState.getBlockState().getBlock().getTextComponent().getText();
+    }
+
+    @Override
+    public String getTag() {
+        return "name";
     }
 
     @Override

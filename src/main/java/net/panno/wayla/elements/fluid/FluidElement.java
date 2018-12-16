@@ -6,20 +6,29 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.util.HitResult;
 import net.minecraft.world.FluidRayTraceMode;
 import net.panno.wayla.elements.Element;
+import net.panno.wayla.elements.Layout;
 
 public class FluidElement extends Element<FluidState> {
 
-    public int getPriority() {
-        if (!isVisible()) {
-            return -1;
-        }
-        return 1;
+    public FluidElement(Layout layout) {
+        this.layout = layout;
+        addSubElement(new FluidRendererElement(this));
+        addSubElement(new FluidNameElement(this));
+        addSubElement(new FluidModNameElement(this));
     }
 
     public FluidElement() {
         addSubElement(new FluidRendererElement(this));
         addSubElement(new FluidNameElement(this));
         addSubElement(new FluidModNameElement(this));
+    }
+
+    @Override
+    public int getPriority() {
+        if (!isVisible()) {
+            return -1;
+        }
+        return 1;
     }
 
     @Override

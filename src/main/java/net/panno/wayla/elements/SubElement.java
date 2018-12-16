@@ -8,6 +8,10 @@ public abstract class SubElement<T> {
         this.parent = parent;
     }
 
+    public String getTag() {
+        return "";
+    }
+
     // whether the widget is always shown
     private boolean alwaysShown = false;
 

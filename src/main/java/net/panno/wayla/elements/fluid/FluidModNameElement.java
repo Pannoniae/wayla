@@ -1,6 +1,5 @@
 package net.panno.wayla.elements.fluid;
 
-import net.minecraft.block.Block;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.util.registry.Registry;
@@ -16,6 +15,11 @@ public class FluidModNameElement extends SubElement<FluidState> {
     public String getModName() {
         FluidState fluidState = parent.getTarget();
         return Registry.FLUID.getId(fluidState.getFluid()).getNamespace();
+    }
+
+    @Override
+    public String getTag() {
+        return "modName";
     }
 
     @Override

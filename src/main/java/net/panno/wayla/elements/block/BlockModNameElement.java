@@ -18,6 +18,11 @@ public class BlockModNameElement extends SubElement<Block> {
     }
 
     @Override
+    public String getTag() {
+        return "modName";
+    }
+
+    @Override
     public void draw(int x, int y) {
         String modName = getModName();
         MinecraftClient.getInstance().fontRenderer.drawWithShadow("§o"+modName, x, y, 0xFFFF5555);

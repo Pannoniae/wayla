@@ -22,6 +22,11 @@ public class BlockRendererElement extends SubElement<Block> {
     }
 
     @Override
+    public String getTag() {
+        return "render";
+    }
+
+    @Override
     public int getWidth() {
         return 16;
     }
