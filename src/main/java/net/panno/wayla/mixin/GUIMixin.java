@@ -7,19 +7,16 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-
 @Mixin(InGameHud.class)
 public abstract class GUIMixin {
 
-    private HUD hud;
-
-
+    private HUD waylaHUD;
 
     @Inject(at = @At(value = "RETURN"), method = "draw(F)V")
-    private void drawWAYLAInfo(CallbackInfo info) {
-        if (hud == null) {
-            hud = new HUD();
+    private void drawWAYLAInfo(float v, CallbackInfo ci) {
+        if (waylaHUD == null) {
+            waylaHUD = new HUD();
         }
-        hud.draw();
+        waylaHUD.draw();
     }
 }

@@ -17,6 +17,7 @@ public class HUD {
     public HUD() {
         addElement(new BlockElement(Layout.SPECIAL));
         addElement(new FluidElement(Layout.SPECIAL));
+        //addElement(new EntityElement(Layout.SPECIAL));
     }
 
     public ArrayList<Element> elements = new ArrayList<>();
@@ -28,7 +29,7 @@ public class HUD {
 
     public void draw() {
         // apart from 2 margins no element is there
-        if (getTotalHeight() == 2 * innerMargin) {
+        if (getTotalHeight() == 0) {
             return;
         }
         MinecraftClient mc = MinecraftClient.getInstance();
@@ -41,19 +42,17 @@ public class HUD {
         int overlayTopY = marginY;
 
         int overlayBottomX = x + (getWidth() / 2) + marginX;
-        int overlayBottomY = getTotalHeight() + marginY;
+        int overlayBottomY = overlayTopY + marginY + getTotalHeight() + marginY;
 
         drawBeveledBox(overlayTopX, overlayTopY, overlayBottomX, overlayBottomY,
                 SOLID_COLOR, 0xFFFF5555, BACKGROUND_COLOR);
 
-        int currentY = overlayTopY;
+        int currentY = overlayTopY + marginY;
 
         if (drawOnlyOne) {
             Element element = getMostImportantElement();
-            currentY += innerMargin;
             int currentX = x - (element.getMaxWidth() / 2);
             element.draw(currentX, currentY);
-            currentY += innerMargin;
             return;
         }
 
@@ -66,19 +65,14 @@ public class HUD {
     }
 
     private int getTotalHeight() {
-        int height = 0;
         if (drawOnlyOne) {
-            height += innerMargin;
-            Element element = getMostImportantElement();
-            height += element.getHeight();
-            height += innerMargin;
-            return height;
+            return getMostImportantElement().getHeight();
         }
-        height += innerMargin;
+
+        int height = 0;
         for (Element element : elements) {
             height += element.getHeight();
         }
-        height += innerMargin;
 
         return height;
     }
@@ -88,10 +82,12 @@ public class HUD {
     }
 
     public int getWidth() {
-        int width = 0;
+        if (drawOnlyOne) {
+            return getMostImportantElement().getMaxWidth();
+        }
 
-        for (Element element :
-                elements) {
+        int width = 0;
+        for (Element element : elements) {
 
             if (element.getMaxWidth() > width) {
                 width = element.getMaxWidth();

@@ -1,7 +1,8 @@
 {
   "id": "wayla",
   "name": "What Are You Looking At",
-  "version": "1.0.0",
+  "version": "2.6.2",
+  "description": "Show useful stuff about your surroundings.",
   "side": "universal",
   "initializer": "net.panno.wayla.Main",
   "mixins": {

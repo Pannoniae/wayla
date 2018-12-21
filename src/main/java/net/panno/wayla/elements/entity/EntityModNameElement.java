@@ -1,21 +1,21 @@
-package net.panno.wayla.elements.block;
+package net.panno.wayla.elements.entity;
 
-import net.minecraft.block.Block;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.text.TextFormat;
 import net.minecraft.util.registry.Registry;
 import net.panno.wayla.elements.Element;
 import net.panno.wayla.elements.SubElement;
 
-public class BlockModNameElement extends SubElement<Block> {
+public class EntityModNameElement extends SubElement<LivingEntity> {
 
-    BlockModNameElement(Element parent) {
+    EntityModNameElement(Element<LivingEntity> parent) {
         super(parent);
     }
 
     public String getModName() {
-        Block block = parent.getTarget();
-        return Registry.BLOCK.getId(block).getNamespace();
+        LivingEntity entity = parent.getTarget();
+        return Registry.ENTITY_TYPE.getId(entity.getType()).getNamespace();
     }
 
     @Override

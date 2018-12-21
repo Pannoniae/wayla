@@ -4,7 +4,7 @@ public abstract class SubElement<T> {
 
     public Element<T> parent;
 
-    public SubElement(Element parent) {
+    public SubElement(Element<T> parent) {
         this.parent = parent;
     }
 

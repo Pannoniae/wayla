@@ -5,6 +5,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.render.GuiLighting;
 import net.minecraft.client.render.item.ItemRenderer;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 
 
@@ -24,6 +25,11 @@ public class RenderUtil {
             GlStateManager.popMatrix();
         }
     }
+
+    public static void renderEntity(LivingEntity entity, int x, int y) {
+        // TODO
+    }
+
     /* Borrowed from McJty */
     /**
      * Draw a beveled box. x2 and y2 are not included.

@@ -36,7 +36,6 @@ public abstract class Element<T> implements Comparable<Element> {
                 name.draw(x + render.getWidth() + innerMargin, y);
                 SubElement modName = getElementWithTag("modName");
                 modName.draw(x + render.getWidth() + innerMargin, y + innerMargin + name.getHeight());
-                modName.draw(x + render.getWidth() + innerMargin, y + innerMargin + name.getHeight());
                 return;
             }
 

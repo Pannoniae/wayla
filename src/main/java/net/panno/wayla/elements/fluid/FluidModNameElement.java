@@ -36,6 +36,6 @@ public class FluidModNameElement extends SubElement<FluidState> {
 
     @Override
     public int getHeight() {
-        return MinecraftClient.getInstance().fontRenderer.FONT_HEIGHT;
+        return MinecraftClient.getInstance().fontRenderer.fontHeight;
     }
 }

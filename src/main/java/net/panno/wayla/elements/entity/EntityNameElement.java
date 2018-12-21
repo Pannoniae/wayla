@@ -1,19 +1,19 @@
-package net.panno.wayla.elements.block;
+package net.panno.wayla.elements.entity;
 
-import net.minecraft.block.Block;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.entity.LivingEntity;
 import net.panno.wayla.elements.Element;
 import net.panno.wayla.elements.SubElement;
 
-public class BlockNameElement extends SubElement<Block> {
+public class EntityNameElement extends SubElement<LivingEntity> {
 
-    BlockNameElement(Element parent) {
+    EntityNameElement(Element<LivingEntity> parent) {
         super(parent);
     }
 
-    public String getBlockName() {
-        Block block = parent.getTarget();
-        return block.getTextComponent().getText();
+    public String getEntityName() {
+        LivingEntity entity = parent.getTarget();
+        return entity.getDisplayName().getText();
     }
 
     @Override
@@ -24,14 +24,14 @@ public class BlockNameElement extends SubElement<Block> {
     @Override
     public void draw(int x, int y) {
         MinecraftClient mc = MinecraftClient.getInstance();
-        String name = getBlockName();
+        String name = getEntityName();
 
         mc.fontRenderer.drawWithShadow(name, x, y, 0xFFFF5555);
     }
 
     @Override
     public int getWidth() {
-        String name = getBlockName();
+        String name = getEntityName();
         return MinecraftClient.getInstance().fontRenderer.getStringWidth(name);
     }
 
